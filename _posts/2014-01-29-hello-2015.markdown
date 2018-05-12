@@ -17,3 +17,11 @@ tags:
 Start------------> New
 
 
+公式测试：
+
+$$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
+
+$$ \sideset{^1_2}{^3_4}\bigotimes $$
+
+公式编辑参考页面：
+<a href="https://www.zybuluo.com/codeep/note/163962">https://www.zybuluo.com/codeep/note/163962</a>
