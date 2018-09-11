@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Welcome to Blog - 未知糖果 | X-Candy</title>
+    <title>ubuntu无显示器配置方案 - 未知糖果 | X-Candy</title>
 
-    <link rel="canonical" href="http://xcandy.net/2015/01/29/hello-2015/">
+    <link rel="canonical" href="http://xcandy.net/2018/09/06/x11-conf/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -150,15 +150,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#EnvConfig" title="EnvConfig">EnvConfig</a>
                         
                     </div>
-                    <h1>Welcome to Blog</h1>
+                    <h1>ubuntu无显示器配置方案</h1>
                     
                     
-                    <h2 class="subheading"> "Hello World, Hello Blog"</h2>
+                    <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by xcandy on January 29, 2015</span>
+                    <span class="meta">Posted by xcandy on September 6, 2018</span>
                 </div>
             </div>
         </div>
@@ -177,21 +177,41 @@
                 post-container">
 
 				<blockquote>
-  <p>“Yeah It’s on. ”</p>
+  <p>本文主要解决ubuntu在没有显示器的情况下的虚拟显示器配置</p>
 </blockquote>
 
 <h2 id="正文">正文</h2>
+<p>本文主要解决ubuntu下没有外接显示器，通过配置/etc/X11下的xorg.conf文件增加虚拟显示器，从而实现远程连接能显示图像画面</p>
+<h3 id="xorgconf配置">xorg.conf配置</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Section "Monitor"
+    Identifier     "Monitor0"
+    VendorName     "Unknown"
+    ModelName      "Unknown"
+    HorizSync       28.0 - 33.0    #Virtual monitor needs this
+    VertRefresh     43.0 - 72.0    #this, too
+    Option         "DPMS"
+EndSection
 
-<p>Start————&gt; New</p>
+Section "Device"
+    Identifier     "Device0"
+    Driver         "nvidia"              #change for AMD or Intel
+    VendorName     "NVIDIA Corporation"  #this, too
+    Option "NoLogo" "1"                  #also this
+EndSection
 
-<p>公式测试：</p>
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    Monitor        "Monitor0"
+    DefaultDepth    24
+    SubSection     "Display"
+        Depth       24
+        Virtual 1920 1080
+    Option          "AllowEmptyInitialConfiguration" "True"
+    EndSubSection
+EndSection
+</code></pre></div></div>
 
-<script type="math/tex; mode=display">x^{y^z}=(1+{\rm e}^x)^{-2xy^w}</script>
-
-<script type="math/tex; mode=display">\sideset{^1_2}{^3_4}\bigotimes</script>
-
-<p>公式编辑参考页面：
-<a href="https://www.zybuluo.com/codeep/note/163962">https://www.zybuluo.com/codeep/note/163962</a></p>
 
 
                 <hr>
@@ -201,10 +221,10 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2018/06/17/hello/" data-toggle="tooltip" data-placement="top" title="Welcome">Next Post &rarr;</a>
+                    <li class="previous">
+                        <a href="/2018/07/31/cmake_know/" data-toggle="tooltip" data-placement="top" title="cmake常用小技巧">&larr; Previous Post</a>
                     </li>
+                    
                     
                 </ul>
 

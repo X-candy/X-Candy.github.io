@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Welcome to Blog - 未知糖果 | X-Candy</title>
+    <title>caffe中的妖娥子 - 未知糖果 | X-Candy</title>
 
-    <link rel="canonical" href="http://xcandy.net/2015/01/29/hello-2015/">
+    <link rel="canonical" href="http://xcandy.net/2018/07/26/caffe_know/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -150,15 +150,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#EnvConfig" title="EnvConfig">EnvConfig</a>
                         
                     </div>
-                    <h1>Welcome to Blog</h1>
+                    <h1>caffe中的妖娥子</h1>
                     
                     
-                    <h2 class="subheading"> "Hello World, Hello Blog"</h2>
+                    <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by xcandy on January 29, 2015</span>
+                    <span class="meta">Posted by xcandy on July 26, 2018</span>
                 </div>
             </div>
         </div>
@@ -177,21 +177,45 @@
                 post-container">
 
 				<blockquote>
-  <p>“Yeah It’s on. ”</p>
+  <p>本文主要汇总了在编译caffe过程中的各种妖娥子问题</p>
 </blockquote>
 
 <h2 id="正文">正文</h2>
 
-<p>Start————&gt; New</p>
+<p>Error 1:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#  error "OpenCV 4.x+ requires enabled C++11 support"
+</code></pre></div></div>
+<p>主要引起原因是caffe切换至C++ 11作为标准。
+解决方法：可以在cmake 中增加编译选项-DCMAKE_CXX_FLAGS=”-std=c++11”</p>
 
-<p>公式测试：</p>
+<p>Error 2:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>缺少OpenCV配置环境
+</code></pre></div></div>
+<p>解决方法：在编译前事先使用
+export OpenCV_DIR=XXX/XXX/opencv-install
+后在进行编译</p>
 
-<script type="math/tex; mode=display">x^{y^z}=(1+{\rm e}^x)^{-2xy^w}</script>
+<p>Error 3:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>提示protobuf版本过低
+</code></pre></div></div>
+<p>解决方法:</p>
 
-<script type="math/tex; mode=display">\sideset{^1_2}{^3_4}\bigotimes</script>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get purge libprotobuf  
+sudo apt-get purge protobuf-compile
+mkdir protobuf
+</code></pre></div></div>
 
-<p>公式编辑参考页面：
-<a href="https://www.zybuluo.com/codeep/note/163962">https://www.zybuluo.com/codeep/note/163962</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd protobuf
+sudo apt-get install autoconf automake libtool curl make g++ unzip
+git clone https://github.com/google/protobuf.git 
+./autogen
+./configure --prefix=/usr
+make -j8
+sudo make install
+</code></pre></div></div>
+<hr />
+<p>http://blog.fangchengjin.cn/reid-market-1501.html</p>
+
 
 
                 <hr>
@@ -201,9 +225,13 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2018/07/17/SSD/" data-toggle="tooltip" data-placement="top" title="SSD win config">&larr; Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2018/06/17/hello/" data-toggle="tooltip" data-placement="top" title="Welcome">Next Post &rarr;</a>
+                        <a href="/2018/07/31/cmake_know/" data-toggle="tooltip" data-placement="top" title="cmake常用小技巧">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>SSD win config - 未知糖果 | X-Candy</title>
+
+    <link rel="canonical" href="http://xcandy.net/2018/07/17/SSD/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    <!-- 数学公式 -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+     });
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">X-Candy</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/post-bg-2015.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#EnvConfig" title="EnvConfig">EnvConfig</a>
+                        
+                    </div>
+                    <h1>SSD win config</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by xcandy on July 17, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>Opencv 环境配置</p>
+</blockquote>
+
+<h2 id="正文">正文</h2>
+
+<p>cudnn.hpp报错cudnnSetConvolution2dDescriptor</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Dtype</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">setConvolutionDesc</span><span class="p">(</span><span class="n">cudnnConvolutionDescriptor_t</span><span class="o">*</span> <span class="n">conv</span><span class="p">,</span>
+    <span class="n">cudnnTensorDescriptor_t</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">cudnnFilterDescriptor_t</span> <span class="n">filter</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">pad_h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pad_w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stride_h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stride_w</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if CUDNN_VERSION_MIN(6, 0, 0)
+</span>  <span class="n">CUDNN_CHECK</span><span class="p">(</span><span class="n">cudnnSetConvolution2dDescriptor</span><span class="p">(</span><span class="o">*</span><span class="n">conv</span><span class="p">,</span>
+      <span class="n">pad_h</span><span class="p">,</span> <span class="n">pad_w</span><span class="p">,</span> <span class="n">stride_h</span><span class="p">,</span> <span class="n">stride_w</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CUDNN_CROSS_CORRELATION</span><span class="p">,</span>
+      <span class="n">dataType</span><span class="o">&lt;</span><span class="n">Dtype</span><span class="o">&gt;::</span><span class="n">type</span><span class="p">));</span>
+<span class="cp">#else
+</span>    <span class="n">CUDNN_CHECK</span><span class="p">(</span><span class="n">cudnnSetConvolution2dDescriptor</span><span class="p">(</span><span class="o">*</span><span class="n">conv</span><span class="p">,</span>
+      <span class="n">pad_h</span><span class="p">,</span> <span class="n">pad_w</span><span class="p">,</span> <span class="n">stride_h</span><span class="p">,</span> <span class="n">stride_w</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CUDNN_CROSS_CORRELATION</span><span class="p">));</span>
+<span class="cp">#endif
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>win-caffe 配置SSD
+include</p>
+
+<p>Proto 增加</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">42</span><span class="o">:</span>
+<span class="c1">// The label (display) name and label id.
+</span><span class="n">message</span> <span class="n">LabelMapItem</span> <span class="p">{</span>
+  <span class="c1">// Both name and label are required.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">label</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// display_name is optional.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">display_name</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">LabelMap</span> <span class="p">{</span>
+  <span class="n">repeated</span> <span class="n">LabelMapItem</span> <span class="n">item</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Sample a bbox in the normalized space [0, 1] with provided constraints.
+</span><span class="n">message</span> <span class="n">Sampler</span> <span class="p">{</span>
+  <span class="c1">// Minimum scale of the sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">min_scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">];</span>
+  <span class="c1">// Maximum scale of the sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_scale</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">];</span>
+
+  <span class="c1">// Minimum aspect ratio of the sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">min_aspect_ratio</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">];</span>
+  <span class="c1">// Maximum aspect ratio of the sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_aspect_ratio</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Constraints for selecting sampled bbox.
+</span><span class="n">message</span> <span class="n">SampleConstraint</span> <span class="p">{</span>
+  <span class="c1">// Minimum Jaccard overlap between sampled bbox and all bboxes in
+</span>  <span class="c1">// AnnotationGroup.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">min_jaccard_overlap</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Maximum Jaccard overlap between sampled bbox and all bboxes in
+</span>  <span class="c1">// AnnotationGroup.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_jaccard_overlap</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// Minimum coverage of sampled bbox by all bboxes in AnnotationGroup.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">min_sample_coverage</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="c1">// Maximum coverage of sampled bbox by all bboxes in AnnotationGroup.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_sample_coverage</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="c1">// Minimum coverage of all bboxes in AnnotationGroup by sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">min_object_coverage</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="c1">// Maximum coverage of all bboxes in AnnotationGroup by sampled bbox.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_object_coverage</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Sample a batch of bboxes with provided constraints.
+</span><span class="n">message</span> <span class="n">BatchSampler</span> <span class="p">{</span>
+  <span class="c1">// Use original image as the source for sampling.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">use_original_image</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+
+  <span class="c1">// Constraints for sampling bbox.
+</span>  <span class="n">optional</span> <span class="n">Sampler</span> <span class="n">sampler</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// Constraints for determining if a sampled bbox is positive or negative.
+</span>  <span class="n">optional</span> <span class="n">SampleConstraint</span> <span class="n">sample_constraint</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="c1">// If provided, break when found certain number of samples satisfing the
+</span>  <span class="c1">// sample_constraint.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">max_sample</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="c1">// Maximum number of trials for sampling to avoid infinite loop.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">max_trials</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">100</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Condition for emitting annotations.
+</span><span class="n">message</span> <span class="n">EmitConstraint</span> <span class="p">{</span>
+  <span class="k">enum</span> <span class="n">EmitType</span> <span class="p">{</span>
+    <span class="n">CENTER</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">MIN_OVERLAP</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">EmitType</span> <span class="n">emit_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">CENTER</span><span class="p">];</span>
+  <span class="c1">// If emit_type is MIN_OVERLAP, provide the emit_overlap.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">emit_overlap</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// The normalized bounding box [0, 1] w.r.t. the input image size.
+</span><span class="n">message</span> <span class="n">NormalizedBBox</span> <span class="p">{</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">xmin</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">ymin</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">label</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">difficult</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Annotation for each object instance.
+</span><span class="n">message</span> <span class="n">Annotation</span> <span class="p">{</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">instance_id</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">NormalizedBBox</span> <span class="n">bbox</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Group of annotations for a particular label.
+</span><span class="n">message</span> <span class="n">AnnotationGroup</span> <span class="p">{</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">group_label</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">repeated</span> <span class="n">Annotation</span> <span class="n">annotation</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// An extension of Datum which contains "rich" annotations.
+</span><span class="n">message</span> <span class="n">AnnotatedDatum</span> <span class="p">{</span>
+  <span class="k">enum</span> <span class="n">AnnotationType</span> <span class="p">{</span>
+    <span class="n">BBOX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">Datum</span> <span class="n">datum</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// If there are "rich" annotations, specify the type of annotation.
+</span>  <span class="c1">// Currently it only supports bounding box.
+</span>  <span class="c1">// If there are no "rich" annotations, use label in datum instead.
+</span>  <span class="n">optional</span> <span class="n">AnnotationType</span> <span class="n">type</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Each group contains annotation for a particular class.
+</span>  <span class="n">repeated</span> <span class="n">AnnotationGroup</span> <span class="n">annotation_group</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">----------------------------------------------------------------------</span>
+
+  <span class="n">repeated</span> <span class="n">NetState</span> <span class="n">test_state</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>
+<span class="mi">252</span><span class="o">:</span>
+ <span class="c1">// Evaluation type.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">eval_type</span> <span class="o">=</span> <span class="mi">41</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="s">"classification"</span><span class="p">];</span>
+  <span class="c1">// ap_version: different ways of computing Average Precision.
+</span>  <span class="c1">//    Check https://sanchom.wordpress.com/tag/average-precision/ for details.
+</span>  <span class="c1">//    11point: the 11-point interpolated average precision. Used in VOC2007.
+</span>  <span class="c1">//    MaxIntegral: maximally interpolated AP. Used in VOC2012/ILSVRC.
+</span>  <span class="c1">//    Integral: the natural integral of the precision-recall curve.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">ap_version</span> <span class="o">=</span> <span class="mi">42</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="s">"Integral"</span><span class="p">];</span>
+  <span class="c1">// If true, display per class result.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">show_per_class_result</span> <span class="o">=</span> <span class="mi">44</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  
+ <span class="o">----------------------------------------------------------------------</span> 
+  <span class="n">repeated</span> <span class="n">int32</span> <span class="n">stepvalue</span> <span class="o">=</span> <span class="mi">34</span><span class="p">;</span>
+ <span class="mi">311</span><span class="o">:</span>
+    <span class="c1">// the stepsize for learning rate policy "plateau"
+</span>  <span class="n">repeated</span> <span class="n">int32</span> <span class="n">plateau_winsize</span> <span class="o">=</span> <span class="mi">43</span><span class="p">;</span>
+  
+ <span class="o">----------------------------------------------------------------------</span> 
+ 
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">current_step</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span> <span class="c1">// The current step for learning rate
+</span>  <span class="mi">379</span><span class="o">:</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">minimum_loss</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1E38</span><span class="p">];</span> <span class="c1">// Historical minimum loss
+</span>  <span class="n">optional</span> <span class="n">int32</span> <span class="n">iter_last_event</span> <span class="o">=</span> <span class="mi">6</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span> <span class="c1">// The iteration when last lr-update or min_loss-update happend
+</span><span class="o">----------------------------------------------------------------------</span> 
+ <span class="n">optional</span> <span class="n">AccuracyParameter</span> <span class="n">accuracy_param</span> <span class="o">=</span> <span class="mi">102</span><span class="p">;</span>
+ <span class="mi">493</span><span class="o">:</span>
+ <span class="n">optional</span> <span class="n">AnnotatedDataParameter</span> <span class="n">annotated_data_param</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">DetectionEvaluateParameter</span> <span class="n">detection_evaluate_param</span> <span class="o">=</span> <span class="mi">205</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">DetectionOutputParameter</span> <span class="n">detection_output_param</span> <span class="o">=</span> <span class="mi">204</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">MultiBoxLossParameter</span> <span class="n">multibox_loss_param</span> <span class="o">=</span> <span class="mi">201</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">NormalizeParameter</span> <span class="n">norm_param</span> <span class="o">=</span> <span class="mi">206</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">PermuteParameter</span> <span class="n">permute_param</span> <span class="o">=</span> <span class="mi">202</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">PriorBoxParameter</span> <span class="n">prior_box_param</span> <span class="o">=</span> <span class="mi">203</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">VideoDataParameter</span> <span class="n">video_data_param</span> <span class="o">=</span> <span class="mi">207</span><span class="p">;</span>
+  
+  
+<span class="o">----------------------------------------------------------------------</span> 
+<span class="n">TransformationParameter</span>
+<span class="p">{</span>
+   <span class="p">....</span>
+  <span class="c1">// Specify if we would like to randomly crop an image.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">crop_size</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="mi">558</span><span class="o">:</span>
+    <span class="n">optional</span> <span class="n">uint32</span> <span class="n">crop_h</span> <span class="o">=</span> <span class="mi">11</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">crop_w</span> <span class="o">=</span> <span class="mi">12</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+    <span class="c1">// Resize policy
+</span>  <span class="n">optional</span> <span class="n">ResizeParameter</span> <span class="n">resize_param</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="c1">// Noise policy
+</span>  <span class="n">optional</span> <span class="n">NoiseParameter</span> <span class="n">noise_param</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="c1">// Distortion policy
+</span>  <span class="n">optional</span> <span class="n">DistortionParameter</span> <span class="n">distort_param</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
+  <span class="c1">// Expand policy
+</span>  <span class="n">optional</span> <span class="n">ExpansionParameter</span> <span class="n">expand_param</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>
+  <span class="c1">// Constraint for emitting the annotation after transformation.
+</span>  <span class="n">optional</span> <span class="n">EmitConstraint</span> <span class="n">emit_constraint</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+
+<span class="o">----------------------------------------------------------------------</span> 
+
+<span class="c1">// Message that stores parameters used by data transformer for resize policy
+</span><span class="n">message</span> <span class="n">ResizeParameter</span> <span class="p">{</span>
+  <span class="c1">//Probability of using this resize policy
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">1</span><span class="p">];</span>
+
+  <span class="k">enum</span> <span class="n">Resize_mode</span> <span class="p">{</span>
+    <span class="n">WARP</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">FIT_SMALL_SIZE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">FIT_LARGE_SIZE_AND_PAD</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">Resize_mode</span> <span class="n">resize_mode</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">WARP</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// A parameter used to update bbox in FIT_SMALL_SIZE mode.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">height_scale</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">width_scale</span> <span class="o">=</span> <span class="mi">9</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+
+  <span class="k">enum</span> <span class="n">Pad_mode</span> <span class="p">{</span>
+    <span class="n">CONSTANT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">MIRRORED</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">REPEAT_NEAREST</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// Padding mode for BE_SMALL_SIZE_AND_PAD mode and object centering
+</span>  <span class="n">optional</span> <span class="n">Pad_mode</span> <span class="n">pad_mode</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">CONSTANT</span><span class="p">];</span>
+  <span class="c1">// if specified can be repeated once (would fill all the channels)
+</span>  <span class="c1">// or can be repeated the same number of times as channels
+</span>  <span class="c1">// (would use it them to the corresponding channel)
+</span>  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">pad_value</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+  <span class="k">enum</span> <span class="n">Interp_mode</span> <span class="p">{</span> <span class="c1">//Same as in OpenCV
+</span>    <span class="n">LINEAR</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">AREA</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">NEAREST</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">CUBIC</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">LANCZOS4</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">//interpolation for for resizing
+</span>  <span class="n">repeated</span> <span class="n">Interp_mode</span> <span class="n">interp_mode</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">SaltPepperParameter</span> <span class="p">{</span>
+  <span class="c1">//Percentage of pixels
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">fraction</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Message that stores parameters used by data transformer for transformation
+// policy
+</span><span class="n">message</span> <span class="n">NoiseParameter</span> <span class="p">{</span>
+  <span class="c1">//Probability of using this resize policy
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// Histogram equalized
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">hist_eq</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Color inversion
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">inverse</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Grayscale
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">decolorize</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Gaussian blur
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">gauss_blur</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="c1">// JPEG compression quality (-1 = no compression)
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">jpeg</span> <span class="o">=</span> <span class="mi">6</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Posterization
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">posterize</span> <span class="o">=</span> <span class="mi">7</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="c1">// Erosion
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">erode</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="c1">// Salt-and-pepper noise
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">saltpepper</span> <span class="o">=</span> <span class="mi">9</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="n">optional</span> <span class="n">SaltPepperParameter</span> <span class="n">saltpepper_param</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+  <span class="c1">// Local histogram equalization
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">clahe</span> <span class="o">=</span> <span class="mi">11</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="c1">// Color space conversion
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">convert_to_hsv</span> <span class="o">=</span> <span class="mi">12</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+
+  <span class="c1">// Color space conversion
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">convert_to_lab</span> <span class="o">=</span> <span class="mi">13</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Message that stores parameters used by data transformer for distortion policy
+</span><span class="n">message</span> <span class="n">DistortionParameter</span> <span class="p">{</span>
+  <span class="c1">// The probability of adjusting brightness.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">brightness_prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Amount to add to the pixel values within [-delta, delta].
+</span>  <span class="c1">// The possible value is within [0, 255]. Recommend 32.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">brightness_delta</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+
+  <span class="c1">// The probability of adjusting contrast.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">contrast_prob</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Lower bound for random contrast factor. Recommend 0.5.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">contrast_lower</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Upper bound for random contrast factor. Recommend 1.5.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">contrast_upper</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+
+  <span class="c1">// The probability of adjusting hue.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">hue_prob</span> <span class="o">=</span> <span class="mi">6</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Amount to add to the hue channel within [-delta, delta].
+</span>  <span class="c1">// The possible value is within [0, 180]. Recommend 36.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">hue_delta</span> <span class="o">=</span> <span class="mi">7</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+
+  <span class="c1">// The probability of adjusting saturation.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">saturation_prob</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Lower bound for the random saturation factor. Recommend 0.5.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">saturation_lower</span> <span class="o">=</span> <span class="mi">9</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+  <span class="c1">// Upper bound for the random saturation factor. Recommend 1.5.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">saturation_upper</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+
+  <span class="c1">// The probability of randomly order the image channels.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">random_order_prob</span> <span class="o">=</span> <span class="mi">11</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Message that stores parameters used by data transformer for expansion policy
+</span><span class="n">message</span> <span class="n">ExpansionParameter</span> <span class="p">{</span>
+  <span class="c1">//Probability of using this expansion policy
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// The ratio to expand the image.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">max_expand_ratio</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">AnnotatedDataParameter</span> <span class="p">{</span>
+  <span class="c1">// Define the sampler.
+</span>  <span class="n">repeated</span> <span class="n">BatchSampler</span> <span class="n">batch_sampler</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Store label name and label id in LabelMap format.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">label_map_file</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// If provided, it will replace the AnnotationType stored in each
+</span>  <span class="c1">// AnnotatedDatum.
+</span>  <span class="n">optional</span> <span class="n">AnnotatedDatum</span><span class="p">.</span><span class="n">AnnotationType</span> <span class="n">anno_type</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Message that store parameters used by DetectionEvaluateLayer
+</span><span class="n">message</span> <span class="n">DetectionEvaluateParameter</span> <span class="p">{</span>
+  <span class="c1">// Number of classes that are actually predicted. Required!
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Label id for background class. Needed for sanity check so that
+</span>  <span class="c1">// background class is neither in the ground truth nor the detections.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">background_label_id</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// Threshold for deciding true/false positive.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">overlap_threshold</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">];</span>
+  <span class="c1">// If true, also consider difficult ground truth for evaluation.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">evaluate_difficult_gt</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// A file which contains a list of names and sizes with same order
+</span>  <span class="c1">// of the input DB. The file is in the following format:
+</span>  <span class="c1">//    name height width
+</span>  <span class="c1">//    ...
+</span>  <span class="c1">// If provided, we will scale the prediction and ground truth NormalizedBBox
+</span>  <span class="c1">// for evaluation.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">name_size_file</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="c1">// The resize parameter used in converting NormalizedBBox to original image.
+</span>  <span class="n">optional</span> <span class="n">ResizeParameter</span> <span class="n">resize_param</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">NonMaximumSuppressionParameter</span> <span class="p">{</span>
+  <span class="c1">// Threshold to be used in nms.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">nms_threshold</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">];</span>
+  <span class="c1">// Maximum number of results to be kept.
+</span>  <span class="n">optional</span> <span class="n">int32</span> <span class="n">top_k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Parameter for adaptive nms.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">eta</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">SaveOutputParameter</span> <span class="p">{</span>
+  <span class="c1">// Output directory. If not empty, we will save the results.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">output_directory</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Output name prefix.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">output_name_prefix</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Output format.
+</span>  <span class="c1">//    VOC - PASCAL VOC output format.
+</span>  <span class="c1">//    COCO - MS COCO output format.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">output_format</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="c1">// If you want to output results, must also provide the following two files.
+</span>  <span class="c1">// Otherwise, we will ignore saving results.
+</span>  <span class="c1">// label map file.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">label_map_file</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="c1">// A file which contains a list of names and sizes with same order
+</span>  <span class="c1">// of the input DB. The file is in the following format:
+</span>  <span class="c1">//    name height width
+</span>  <span class="c1">//    ...
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">name_size_file</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="c1">// Number of test images. It can be less than the lines specified in
+</span>  <span class="c1">// name_size_file. For example, when we only want to evaluate on part
+</span>  <span class="c1">// of the test images.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">num_test_image</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="c1">// The resize parameter used in saving the data.
+</span>  <span class="n">optional</span> <span class="n">ResizeParameter</span> <span class="n">resize_param</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Message that store parameters used by DetectionOutputLayer
+</span><span class="n">message</span> <span class="n">DetectionOutputParameter</span> <span class="p">{</span>
+  <span class="c1">// Number of classes to be predicted. Required!
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// If true, bounding box are shared among different classes.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">share_location</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// Background label id. If there is no background class,
+</span>  <span class="c1">// set it as -1.
+</span>  <span class="n">optional</span> <span class="n">int32</span> <span class="n">background_label_id</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// Parameters used for non maximum suppression.
+</span>  <span class="n">optional</span> <span class="n">NonMaximumSuppressionParameter</span> <span class="n">nms_param</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="c1">// Parameters used for saving detection results.
+</span>  <span class="n">optional</span> <span class="n">SaveOutputParameter</span> <span class="n">save_output_param</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="c1">// Type of coding method for bbox.
+</span>  <span class="n">optional</span> <span class="n">PriorBoxParameter</span><span class="p">.</span><span class="n">CodeType</span> <span class="n">code_type</span> <span class="o">=</span> <span class="mi">6</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">CORNER</span><span class="p">];</span>
+  <span class="c1">// If true, variance is encoded in target; otherwise we need to adjust the
+</span>  <span class="c1">// predicted offset accordingly.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">variance_encoded_in_target</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Number of total bboxes to be kept per image after nms step.
+</span>  <span class="c1">// -1 means keeping all bboxes after nms step.
+</span>  <span class="n">optional</span> <span class="n">int32</span> <span class="n">keep_top_k</span> <span class="o">=</span> <span class="mi">7</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+  <span class="c1">// Only consider detections whose confidences are larger than a threshold.
+</span>  <span class="c1">// If not provided, consider all boxes.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="c1">// If true, visualize the detection results.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">visualize</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// The threshold used to visualize the detection results.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">visualize_threshold</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+  <span class="c1">// If provided, save outputs to video file.
+</span>  <span class="n">optional</span> <span class="n">string</span> <span class="n">save_file</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">// Message that store parameters used by MultiBoxLossLayer
+</span><span class="n">message</span> <span class="n">MultiBoxLossParameter</span> <span class="p">{</span>
+  <span class="c1">// Localization loss type.
+</span>  <span class="k">enum</span> <span class="n">LocLossType</span> <span class="p">{</span>
+    <span class="n">L2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">SMOOTH_L1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">LocLossType</span> <span class="n">loc_loss_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">SMOOTH_L1</span><span class="p">];</span>
+  <span class="c1">// Confidence loss type.
+</span>  <span class="k">enum</span> <span class="n">ConfLossType</span> <span class="p">{</span>
+    <span class="n">SOFTMAX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">LOGISTIC</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">ConfLossType</span> <span class="n">conf_loss_type</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">SOFTMAX</span><span class="p">];</span>
+  <span class="c1">// Weight for localization loss.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">loc_weight</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">];</span>
+  <span class="c1">// Number of classes to be predicted. Required!
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="c1">// If true, bounding box are shared among different classes.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">share_location</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// Matching method during training.
+</span>  <span class="k">enum</span> <span class="n">MatchType</span> <span class="p">{</span>
+    <span class="n">BIPARTITE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">PER_PREDICTION</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">MatchType</span> <span class="n">match_type</span> <span class="o">=</span> <span class="mi">6</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">PER_PREDICTION</span><span class="p">];</span>
+  <span class="c1">// If match_type is PER_PREDICTION, use overlap_threshold to
+</span>  <span class="c1">// determine the extra matching bboxes.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">overlap_threshold</span> <span class="o">=</span> <span class="mi">7</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">];</span>
+  <span class="c1">// Use prior for matching.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">use_prior_for_matching</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// Background label id.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">background_label_id</span> <span class="o">=</span> <span class="mi">9</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// If true, also consider difficult ground truth.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">use_difficult_gt</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// If true, perform negative mining.
+</span>  <span class="c1">// DEPRECATED: use mining_type instead.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">do_neg_mining</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+  <span class="c1">// The negative/positive ratio.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">neg_pos_ratio</span> <span class="o">=</span> <span class="mi">12</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">];</span>
+  <span class="c1">// The negative overlap upperbound for the unmatched predictions.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">neg_overlap</span> <span class="o">=</span> <span class="mi">13</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">];</span>
+  <span class="c1">// Type of coding method for bbox.
+</span>  <span class="n">optional</span> <span class="n">PriorBoxParameter</span><span class="p">.</span><span class="n">CodeType</span> <span class="n">code_type</span> <span class="o">=</span> <span class="mi">14</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">CORNER</span><span class="p">];</span>
+  <span class="c1">// If true, encode the variance of prior box in the loc loss target instead of
+</span>  <span class="c1">// in bbox.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">encode_variance_in_target</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// If true, map all object classes to agnostic class. It is useful for learning
+</span>  <span class="c1">// objectness detector.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">map_object_to_agnostic</span> <span class="o">=</span> <span class="mi">17</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// If true, ignore cross boundary bbox during matching.
+</span>  <span class="c1">// Cross boundary bbox is a bbox who is outside of the image region.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">ignore_cross_boundary_bbox</span> <span class="o">=</span> <span class="mi">18</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// If true, only backpropagate on corners which are inside of the image
+</span>  <span class="c1">// region when encode_type is CORNER or CORNER_SIZE.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">bp_inside</span> <span class="o">=</span> <span class="mi">19</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Mining type during training.
+</span>  <span class="c1">//   NONE : use all negatives.
+</span>  <span class="c1">//   MAX_NEGATIVE : select negatives based on the score.
+</span>  <span class="c1">//   HARD_EXAMPLE : select hard examples based on "Training Region-based Object Detectors with Online Hard Example Mining", Shrivastava et.al.
+</span>  <span class="k">enum</span> <span class="n">MiningType</span> <span class="p">{</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">MAX_NEGATIVE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">HARD_EXAMPLE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">MiningType</span> <span class="n">mining_type</span> <span class="o">=</span> <span class="mi">20</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">MAX_NEGATIVE</span><span class="p">];</span>
+  <span class="c1">// Parameters used for non maximum suppression durig hard example mining.
+</span>  <span class="n">optional</span> <span class="n">NonMaximumSuppressionParameter</span> <span class="n">nms_param</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">sample_size</span> <span class="o">=</span> <span class="mi">22</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">64</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">use_prior_for_nms</span> <span class="o">=</span> <span class="mi">23</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">// Message that stores parameters used by NormalizeLayer
+</span><span class="n">message</span> <span class="n">NormalizeParameter</span> <span class="p">{</span>
+  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">across_spatial</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// Initial value of scale. Default is 1.0 for all
+</span>  <span class="n">optional</span> <span class="n">FillerParameter</span> <span class="n">scale_filler</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Whether or not scale parameters are shared across channels.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">channel_shared</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// Epsilon for not dividing by zero while normalizing variance
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">eps</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">PermuteParameter</span> <span class="p">{</span>
+  <span class="c1">// The new orders of the axes of data. Notice it should be with
+</span>  <span class="c1">// in the same range as the input data, and it starts from 0.
+</span>  <span class="c1">// Do not provide repeated order.
+</span>  <span class="n">repeated</span> <span class="n">uint32</span> <span class="n">order</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">// Message that store parameters used by PriorBoxLayer
+</span><span class="n">message</span> <span class="n">PriorBoxParameter</span> <span class="p">{</span>
+  <span class="c1">// Encode/decode type.
+</span>  <span class="k">enum</span> <span class="n">CodeType</span> <span class="p">{</span>
+    <span class="n">CORNER</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CENTER_SIZE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">CORNER_SIZE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// Minimum box size (in pixels). Required!
+</span>  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">min_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Maximum box size (in pixels). Required!
+</span>  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">max_size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Various of aspect ratios. Duplicate ratios will be ignored.
+</span>  <span class="c1">// If none is provided, we use default ratio 1.
+</span>  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="c1">// If true, will flip each aspect ratio.
+</span>  <span class="c1">// For example, if there is aspect ratio "r",
+</span>  <span class="c1">// we will generate aspect ratio "1.0/r" as well.
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">flip</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">true</span><span class="p">];</span>
+  <span class="c1">// If true, will clip the prior so that it is within [0, 1]
+</span>  <span class="n">optional</span> <span class="kt">bool</span> <span class="n">clip</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="nb">false</span><span class="p">];</span>
+  <span class="c1">// Variance for adjusting the prior bboxes.
+</span>  <span class="n">repeated</span> <span class="kt">float</span> <span class="n">variance</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="c1">// By default, we calculate img_height, img_width, step_x, step_y based on
+</span>  <span class="c1">// bottom[0] (feat) and bottom[1] (img). Unless these values are explicitely
+</span>  <span class="c1">// provided.
+</span>  <span class="c1">// Explicitly provide the img_size.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">img_size</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+  <span class="c1">// Either img_size or img_h/img_w should be specified; not both.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">img_h</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">img_w</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+
+  <span class="c1">// Explicitly provide the step size.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="c1">// Either step or step_h/step_w should be specified; not both.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">step_h</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+  <span class="n">optional</span> <span class="kt">float</span> <span class="n">step_w</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+  <span class="c1">// Offset to the top left corner of each cell.
+</span>  <span class="n">optional</span> <span class="kt">float</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">13</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">message</span> <span class="n">VideoDataParameter</span><span class="p">{</span>
+  <span class="k">enum</span> <span class="n">VideoType</span> <span class="p">{</span>
+    <span class="n">WEBCAM</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">VIDEO</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">optional</span> <span class="n">VideoType</span> <span class="n">video_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="n">WEBCAM</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">int32</span> <span class="n">device_id</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+  <span class="n">optional</span> <span class="n">string</span> <span class="n">video_file</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="c1">// Number of frames to be skipped before processing a frame.
+</span>  <span class="n">optional</span> <span class="n">uint32</span> <span class="n">skip_frames</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">[</span><span class="k">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="o">----------------------------------------------------------------------</span> 
+
+
+
+<span class="o">----------------------------------------------------------------------</span> 
+
+
+<span class="o">----------------------------------------------------------------------</span> 
+
+</code></pre></div></div>
+
+<p>libboost_date_time-vc120-mt-gd-1_59.lib
+libboost_filesystem-vc120-mt-gd-1_59.lib
+libboost_system-vc120-mt-gd-1_59.lib
+libglog.lib
+hdf5_hl.lib
+hdf5_cpp.lib
+libopenblas.dll.a
+curand.lib
+cudart.lib
+hdf5.lib
+cublas.lib
+cuda.lib
+cudnn.lib
+libprotobuf.lib
+gflagsd.lib</p>
+
+
+                <hr>
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/07/16/opencv/" data-toggle="tooltip" data-placement="top" title="OpencvBuild">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/07/26/caffe_know/" data-toggle="tooltip" data-placement="top" title="caffe中的妖娥子">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/x-candy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; X-Candy 2018
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

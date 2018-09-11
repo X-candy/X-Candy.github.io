@@ -1,0 +1,10 @@
+## COCO数据集
+
+[Train2017](http://images.cocodataset.org/zips/train2017.zip) 
+[Val2017](http://images.cocodataset.org/zips/val2017.zip) 
+[Test2017](http://images.cocodataset.org/zips/test2017.zip) 
+[Unlabeled2017](http://images.cocodataset.org/zips/unlabeled2017.zip) 
+[annotations2017](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) 
+[stuff_annotations_trainval2017](http://images.cocodataset.org/annotations/stuff_annotations_trainval2017.zip) 
+[panoptic_annotations_trainval2017](http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip) 
+

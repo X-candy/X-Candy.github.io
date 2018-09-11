@@ -12,7 +12,7 @@
 
     <title>未知糖果 | X-Candy</title>
 
-    <link rel="canonical" href="http://localhost:4000/">
+    <link rel="canonical" href="http://xcandy.net/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -156,6 +156,151 @@
     <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 
+<div class="post-preview">
+    <a href="/2018/09/06/x11-conf/">
+        <h2 class="post-title">
+            ubuntu无显示器配置方案
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  本文主要解决ubuntu在没有显示器的情况下的虚拟显示器配置
+
+
+正文
+本文主要解决ubuntu下没有外接显示器，通过配置/etc/X11下的xorg.conf文件增加虚拟显示器，从而实现远程连接能显示图像画面
+xorg.conf配置
+Section "Monitor"
+    Identifier     "Monitor0"
+    VendorName     "Unknown"...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on September 6, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/07/31/cmake_know/">
+        <h2 class="post-title">
+            cmake常用小技巧
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  本文主要汇总了在编写CMakeList中所使用的一些常见的技巧
+
+
+正文
+
+制定输出目录
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on July 31, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/07/26/caffe_know/">
+        <h2 class="post-title">
+            caffe中的妖娥子
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  本文主要汇总了在编译caffe过程中的各种妖娥子问题
+
+
+正文
+
+Error 1:
+#  error "OpenCV 4.x+ requires enabled C++11 support"
+
+主要引起原因是caffe切换至C++ 11作为标准。
+解决方法：可以在cmake 中增加编译选项-DCMAKE_CXX_FLAGS=”-std=c++11”
+
+Error 2:
+缺少OpenCV...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on July 26, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/07/17/SSD/">
+        <h2 class="post-title">
+            SSD win config
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  Opencv 环境配置
+
+
+正文
+
+cudnn.hpp报错cudnnSetConvolution2dDescriptor
+
+template &lt;typename Dtype&gt;
+inline void setConvolutionDesc(cudnnConvolutionDescriptor_t* conv,
+    cudnnTensorDescriptor_t botto...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on July 17, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/07/16/opencv/">
+        <h2 class="post-title">
+            OpencvBuild
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  Opencv 环境配置
+
+
+正文
+
+export OPENCV_INSTALL_ROOT=/home/xcandy/WorkSpace/3rdparty/opencv
+export OPENCV_CONTRIB_ROOT=/media/xcandy/WorkSpace/2.Linux-WorkSpace/opencv_contrib
+cmake -DCMAKE_BUILD_TYPE=R...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on July 16, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/06/17/hello/">
+        <h2 class="post-title">
+            Welcome
+        </h2>
+        
+        <div class="post-content-preview">
+            
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcandy on June 17, 2018
+    </p>
+</div>
+<hr>
+
 <div class="post-preview">
     <a href="/2015/01/29/hello-2015/">
         <h2 class="post-title">

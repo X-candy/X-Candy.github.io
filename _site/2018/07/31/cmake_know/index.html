@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Welcome to Blog - 未知糖果 | X-Candy</title>
+    <title>cmake常用小技巧 - 未知糖果 | X-Candy</title>
 
-    <link rel="canonical" href="http://xcandy.net/2015/01/29/hello-2015/">
+    <link rel="canonical" href="http://xcandy.net/2018/07/31/cmake_know/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -150,15 +150,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#EnvConfig" title="EnvConfig">EnvConfig</a>
                         
                     </div>
-                    <h1>Welcome to Blog</h1>
+                    <h1>cmake常用小技巧</h1>
                     
                     
-                    <h2 class="subheading"> "Hello World, Hello Blog"</h2>
+                    <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by xcandy on January 29, 2015</span>
+                    <span class="meta">Posted by xcandy on July 31, 2018</span>
                 </div>
             </div>
         </div>
@@ -177,21 +177,69 @@
                 post-container">
 
 				<blockquote>
-  <p>“Yeah It’s on. ”</p>
+  <p>本文主要汇总了在编写CMakeList中所使用的一些常见的技巧</p>
 </blockquote>
 
 <h2 id="正文">正文</h2>
 
-<p>Start————&gt; New</p>
+<h3 id="制定输出目录">制定输出目录</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Bin)
+message(STATUS "Output Path:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}")
+</code></pre></div></div>
 
-<p>公式测试：</p>
+<h3 id="读取git或者svn等版本号作为文件版本">读取git或者svn等版本号作为文件版本</h3>
+<p>CMakeList 添加如下语句:</p>
 
-<script type="math/tex; mode=display">x^{y^z}=(1+{\rm e}^x)^{-2xy^w}</script>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET(ROOT_DIR ${PROJECT_SOURCE_DIR})
+message(STATUS "Git Address:${ROOT_DIR}/.git/")
+IF(EXISTS "${ROOT_DIR}/.git/")
+    message(STATUS "Found Git Repository")
+    FIND_PACKAGE(Git)
+    message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}")
+    exec_program(
+      "git"
+      ARGS "log --format='\"[sha1]:%h [author]:%cn [time]:%ci [commit]:%s [branch]:%d\"' -1"
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      OUTPUT_VARIABLE VERSION_SHA1 )
+    add_definitions( -DGIT_SHA1="${VERSION_SHA1}" )
+    set(VERSION_INFO "${VERSION_SHA1}")
+ENDIF(EXISTS "${ROOT_DIR}/.git/")
+configure_file (
+        "Version.h.in"
+        "Version.h"
+)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+</code></pre></div></div>
 
-<script type="math/tex; mode=display">\sideset{^1_2}{^3_4}\bigotimes</script>
+<p>在src中增加Version.h.in文件,内容如下:</p>
 
-<p>公式编辑参考页面：
-<a href="https://www.zybuluo.com/codeep/note/163962">https://www.zybuluo.com/codeep/note/163962</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// the configured options and settings for Tutorial
+#define VERSION_INFO @VERSION_INFO@
+</code></pre></div></div>
+
+<h3 id="制定输出名字">制定输出名字</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add_library(${Project_Name} SHARED ISRWatcher.h SRWatcher.cpp SRWatcher.h)
+#debug 模式输出名字
+SET_TARGET_PROPERTIES(${Project_Name} PROPERTIES OUTPUT_NAME_DEBUG SRWatcher)
+#不区分模式
+SET_TARGET_PROPERTIES(${Project_Name} PROPERTIES OUTPUT_NAME SRWatcher)
+</code></pre></div></div>
+
+<h3 id="git-设置文本编辑器">git 设置文本编辑器</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#设置文本编辑器
+git config --global core.editor vi
+#设置提交模板
+git config --global commit.template .gitee/PULL_REQUEST_TEMPLATE.zh-CN.md
+</code></pre></div></div>
+
+<h3 id="快速添加文件">快速添加文件</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file(GLOB cudaSources cudaUtils/*.cu)
+cudaSources  变量名称
+cudaUtils/*.cu  类型文件
+</code></pre></div></div>
+
 
 
                 <hr>
@@ -201,9 +249,13 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2018/07/26/caffe_know/" data-toggle="tooltip" data-placement="top" title="caffe中的妖娥子">&larr; Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2018/06/17/hello/" data-toggle="tooltip" data-placement="top" title="Welcome">Next Post &rarr;</a>
+                        <a href="/2018/09/06/x11-conf/" data-toggle="tooltip" data-placement="top" title="ubuntu无显示器配置方案">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
