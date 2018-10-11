@@ -5,8 +5,8 @@
     <description></description>
     <link>http://xcandy.net/</link>
     <atom:link href="http://xcandy.net/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 11 Sep 2018 09:53:25 +0800</pubDate>
-    <lastBuildDate>Tue, 11 Sep 2018 09:53:25 +0800</lastBuildDate>
+    <pubDate>Thu, 11 Oct 2018 10:32:33 +0800</pubDate>
+    <lastBuildDate>Thu, 11 Oct 2018 10:32:33 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -71,6 +71,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Bin)
 message(STATUS &quot;Output Path:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}&quot;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;设置生成版本&quot;&gt;设置生成版本&lt;/h4&gt;
+&lt;p&gt;SET(CMAKE_BUILD_TYPE “Release”)
+SET(CMAKE_CXX_FLAGS_DEBUG “$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb”)
+SET(CMAKE_CXX_FLAGS_RELEASE “$ENV{CXXFLAGS} -O3 -Wall”)&lt;/p&gt;
 
 &lt;h3 id=&quot;读取git或者svn等版本号作为文件版本&quot;&gt;读取git或者svn等版本号作为文件版本&lt;/h3&gt;
 &lt;p&gt;CMakeList 添加如下语句:&lt;/p&gt;

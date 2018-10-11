@@ -189,6 +189,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../../Publish/Bin)
 message(STATUS "Output Path:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}")
 </code></pre></div></div>
 
+<h4 id="设置生成版本">设置生成版本</h4>
+<p>SET(CMAKE_BUILD_TYPE “Release”)
+SET(CMAKE_CXX_FLAGS_DEBUG “$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb”)
+SET(CMAKE_CXX_FLAGS_RELEASE “$ENV{CXXFLAGS} -O3 -Wall”)</p>
+
 <h3 id="读取git或者svn等版本号作为文件版本">读取git或者svn等版本号作为文件版本</h3>
 <p>CMakeList 添加如下语句:</p>
 
